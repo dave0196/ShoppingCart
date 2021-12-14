@@ -69,7 +69,7 @@ public class ShoppingCart implements PublicConstants {
 
     public void modifyItemFromMenu() {
         if (itemList.size() == ZERO) {
-            System.out.println("\nCurrently, there are no items in your cart.\n");
+            System.out.println(NO_ITEMS);
             return;
         } else {
             System.out.println("type in the item to be modified");
@@ -176,7 +176,7 @@ public class ShoppingCart implements PublicConstants {
      */
     public void deleteItem() {
         if (itemList.size() == ZERO) { // check whether the map is empty or not
-            System.out.println("\nCurrently, there are no items in your cart.\n");
+            System.out.println(NO_ITEMS);
             return;
         } else {
             System.out.println("Type in the name of the item to be deleted (ignores casing)");
@@ -222,7 +222,7 @@ public class ShoppingCart implements PublicConstants {
     @Override
     public String toString() {
         if (itemList.size() == ZERO) {
-            return "\nCurrently, there are no items in your cart!\n";
+            return NO_ITEMS;
         } else
             return itemList.toString();
     }
