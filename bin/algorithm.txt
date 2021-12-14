@@ -1,0 +1,24 @@
+welcome the user
+prompt the user with the menu
+while case is not e
+    repromt the user with the menu
+
+
+Classes:
+-Main
+    -create a shopping cart instance
+    -display menu
+    -when adding ask for description, price and quantity    
+    -a value returning method for the quantity, validate input (n >= 1)
+
+-Item
+    -Should contain a item description, price as a dollar amount and quantity.
+    -A constructor which sets the item and price.
+    -Getters for any member variables.
+    -An implemented toString method.
+
+-Shopping Cart
+    -Should contain a list of items.
+    -Should have methods that allow you to add an item, delete an item.
+    -Should have methods to compute the subtotal of all items, the tax amount and the granted total (tax plus subtotal).
+    -An implemented toString method which lists all of the shopping cart items.
