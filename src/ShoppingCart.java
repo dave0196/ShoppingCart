@@ -24,7 +24,7 @@ public class ShoppingCart implements PublicConstants {
                 Boolean exists = searchItem(name);
                 if (exists) { // item already exists
                     System.out.printf(
-                            "\nWARNING: This item already exists as:\n\n%s%s\nWould you like to update/modify it? Y or N?\n",
+                            "\n***WARNING*** This item already exists as:\n\n%s%s\nWould you like to update/modify it? Y or N?\n",
                             name, itemList.get(name).toString());
                     String response = sc.nextLine();
                     switch (response) {
@@ -36,7 +36,7 @@ public class ShoppingCart implements PublicConstants {
                         case "No", "NO", "no", "N", "n":
                             return;
                         default:
-                            System.out.println("That's not a valid choice. Please Try again.");
+                            System.out.println("\nThat's not a valid choice. Please Try again.\n");
                             return;
                     }
                 } else {
@@ -60,7 +60,7 @@ public class ShoppingCart implements PublicConstants {
                 sc.next(); // clear bad input from scanner
                 continue;
             } catch (Exception e) {
-                System.out.println("Something went wrong. Please try again.\n");
+                System.out.println(ERROR_MESSAGE);
                 sc.next(); // clear bad input from scanner
                 continue;
             }
@@ -74,41 +74,55 @@ public class ShoppingCart implements PublicConstants {
         } else {
             System.out.println("type in the item to be modified");
             String searchItem = sc.nextLine();
+            searchItem = searchItem.toUpperCase().trim();
             Boolean exists = this.searchItem(searchItem);
             if (exists) {
+                System.out.println("Item Found!\n");
                 Item itemToModify = this.itemList.get(searchItem);
                 this.modifyExistingItem(itemToModify);
                 return;
             } else {
-                System.out.println("Sorry, but it seems that item doesn't exist.");
+                System.out.println("\nSorry, it seems that item doesn't exist.\n");
                 return;
             }
         }
     }
 
     public void modifyExistingItem(Item itemToModify) {
-        // update description
-        System.out.println("Write a new description for the item: ");
-        String newDescription = sc.nextLine();
-        itemToModify.setDescription(newDescription);
+        double newPrice;
+        while (true)
+            try {
+                // update description
+                System.out.println("Write a new description for the item: ");
+                String newDescription = sc.nextLine();
+                itemToModify.setDescription(newDescription);
 
-        // update price
-        System.out.println("Type a new price for the item: ");
-        double newPrice = sc.nextDouble();
+                // update price
+                System.out.println("Type a new price for the item: ");
+                newPrice = sc.nextDouble();
 
-        // update quantity
-        System.out.println("Type the new quantity: ");
-        int newQuantity = sc.nextInt();
-        itemToModify.setQuantity(newQuantity);
-        sc.nextLine();
+                // update quantity
+                System.out.println("Type the new quantity: ");
+                int newQuantity = sc.nextInt();
+                itemToModify.setQuantity(newQuantity);
+                sc.nextLine();
 
-        // make adjustments to totals
-        this.subtotal -= itemToModify.getGrossPrice(); // need to subtract the current item gross price from
-                                                       // subtotal
-        itemToModify.setPricePerUnit(newPrice); // update the items price per unit
-        itemToModify.setGrossPrice(newPrice); // update the items gross price
-        this.subtotal += itemToModify.getGrossPrice(); // update the subtotal
-        computeTotals();
+                // make adjustments to totals
+                this.subtotal -= itemToModify.getGrossPrice(); // need to subtract the current item gross price from
+                // subtotal
+                itemToModify.setPricePerUnit(newPrice); // update the items price per unit
+                itemToModify.setGrossPrice(newPrice); // update the items gross price
+                this.subtotal += itemToModify.getGrossPrice(); // update the subtotal
+                computeTotals();
+                System.out.println("\nSuccess! The item was modified.\n");
+                return;
+            } catch (Exception e) {
+                System.out.println(ERROR_MESSAGE);
+                sc.next();
+                sc.nextLine();
+                continue;
+            }
+
     }
 
     /**
@@ -123,7 +137,7 @@ public class ShoppingCart implements PublicConstants {
                 System.out.println("Type the price per unit in dollars: (must be a positive number)");
                 price = sc.nextDouble();
             } catch (Exception e) {
-                System.out.println("Something went wrong. Please check your input and try again.");
+                System.out.println(ERROR_MESSAGE);
                 sc.next();
                 continue;
             }
@@ -143,7 +157,7 @@ public class ShoppingCart implements PublicConstants {
                 System.out.println("Type the quantity: (must be >= 1) ");
                 quantity = sc.nextInt();
             } catch (Exception e) {
-                System.out.println("Something went wrong. Please check your input and try again.");
+                System.out.println(ERROR_MESSAGE);
                 sc.next();
                 continue;
             }
