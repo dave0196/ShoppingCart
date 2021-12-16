@@ -118,8 +118,8 @@ public class ShoppingCart implements PublicConstants {
                 return;
             } catch (Exception e) {
                 System.out.println(ERROR_MESSAGE);
-                sc.next();
-                sc.nextLine();
+                sc.next(); // clear the bad input from the scanner
+                sc.nextLine(); // read new line in case the exeption happened while reading an integer
                 continue;
             }
 
