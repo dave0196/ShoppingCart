@@ -66,7 +66,10 @@ public class ShoppingCart implements PublicConstants {
             }
         }
     } // end addItem method
-
+    /**
+     * Allows user to modify the properties of an existing item directly from the main menu. 
+     * This method makes a call to the private function modifyExistingItem(). 
+     */
     public void modifyItemFromMenu() {
         if (itemList.size() == ZERO) {
             System.out.println(NO_ITEMS);
@@ -87,7 +90,11 @@ public class ShoppingCart implements PublicConstants {
             }
         }
     }
-
+    
+    /**
+     * Allows the user to modify an item internally. Is called by addItem() and modifyItemFromMenu()
+     * @param itemToModify a reference to the item that will be modified
+     */
     private void modifyExistingItem(Item itemToModify) {
         double newPrice;
         while (true)
@@ -128,7 +135,7 @@ public class ShoppingCart implements PublicConstants {
     /**
      * Validates the price entered for a given item
      * 
-     * @return the valid price per unit of an item
+     * @return the valid, non-negative price per unit of an item
      */
     private double checkPrice() {
         double price = ZERO;
@@ -148,7 +155,7 @@ public class ShoppingCart implements PublicConstants {
     /**
      * Validates the quantity for a given item
      * 
-     * @return the valid quantity of a given item
+     * @return the valid, non-negative quantity of a given item
      */
     private int checkQuantity() {
         int quantity = ZERO;
