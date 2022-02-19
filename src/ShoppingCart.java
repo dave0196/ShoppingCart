@@ -92,7 +92,7 @@ public class ShoppingCart implements PublicConstants {
     }
     
     /**
-     * Allows the user to modify an item internally. Is called by addItem() and modifyItemFromMenu()
+     * Allows the program to modify an item internally. Is called by addItem() and modifyItemFromMenu()
      * @param itemToModify a reference to the item that will be modified
      */
     private void modifyExistingItem(Item itemToModify) {
