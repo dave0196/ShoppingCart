@@ -88,7 +88,7 @@ public class ShoppingCart implements PublicConstants {
         }
     }
 
-    public void modifyExistingItem(Item itemToModify) {
+    private void modifyExistingItem(Item itemToModify) {
         double newPrice;
         while (true)
             try {
@@ -108,11 +108,11 @@ public class ShoppingCart implements PublicConstants {
                 sc.nextLine();
 
                 // make adjustments to totals
-                this.subtotal -= itemToModify.getGrossPrice(); // need to subtract the current item gross price from
+                subtotal -= itemToModify.getGrossPrice(); // need to subtract the current item gross price from
                 // subtotal
                 itemToModify.setPricePerUnit(newPrice); // update the items price per unit
                 itemToModify.setGrossPrice(newPrice); // update the items gross price
-                this.subtotal += itemToModify.getGrossPrice(); // update the subtotal
+                subtotal += itemToModify.getGrossPrice(); // update the subtotal
                 computeTotals();
                 System.out.println("\nSuccess! The item was modified.\n");
                 return;
@@ -130,7 +130,7 @@ public class ShoppingCart implements PublicConstants {
      * 
      * @return the valid price per unit of an item
      */
-    public double checkPrice() {
+    private double checkPrice() {
         double price = ZERO;
         do {
             try {
@@ -150,7 +150,7 @@ public class ShoppingCart implements PublicConstants {
      * 
      * @return the valid quantity of a given item
      */
-    public int checkQuantity() {
+    private int checkQuantity() {
         int quantity = ZERO;
         do {
             try {
@@ -173,7 +173,7 @@ public class ShoppingCart implements PublicConstants {
      * @param searchTerm the name/identifier of the item to be searched
      * @return true if the item was found. False is the item was not found
      */
-    public Boolean searchItem(String searchTerm) {
+    private Boolean searchItem(String searchTerm) {
         for (String s : itemList.keySet()) {
             if (searchTerm.equals(s)) {
                 return true; // match found, the item exits in the list
@@ -215,22 +215,22 @@ public class ShoppingCart implements PublicConstants {
      * @return a textual representation of subtotal, tax, and total
      */
     public String computeTotals() {
-        this.tax = TAX_RATE * this.subtotal;
-        this.total = this.subtotal + tax;
-        return String.format("\nSubtotal is: $%.2f\nTax is: $%.2f\nGrand total is: $%.2f\n", this.subtotal, this.tax,
-                this.total);
+        tax = TAX_RATE * subtotal;
+        total = subtotal + tax;
+        return String.format("\nSubtotal is: $%.2f\nTax is: $%.2f\nGrand total is: $%.2f\n", subtotal, tax,
+                total);
     } // end computeTotals method
 
     public double getSubtotal() {
-        return this.subtotal;
+        return subtotal;
     }
 
     public double getTax() {
-        return this.tax;
+        return tax;
     }
 
     public double getTotal() {
-        return this.total;
+        return total;
     }
 
     @Override

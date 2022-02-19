@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author David Medrano
  * @version 1.2
  */
-public class Main {
+public class Main implements PublicConstants {
 
     public static void main(String[] args) throws Exception {
         ShoppingCart mycart = new ShoppingCart();
@@ -55,6 +55,6 @@ public class Main {
                     System.out.println("\nYou chose an invalid option! Try again.\n");
                     break;
             }
-        } while (!response.equals("e") || !response.equals("E"));
+        } while (!response.equals(SENTINEL_1) || !response.equals(SENTINEL_2));
     } // end displayMenu method
 } // end Main class
